@@ -2,7 +2,7 @@ create database qlclb;
 use qlclb;
 
 create table CLB(
-		MaCLB varchar(10) primary key,
+	MaCLB varchar(10) primary key,
     	TenCLB varchar(30) not null,
     	DiaDiem varchar(30),
     	NgayLap datetime,
@@ -11,7 +11,7 @@ create table CLB(
 );
 
 create table NHANVIEN(
-		MaNV varchar(10) primary key,
+	MaNV varchar(10) primary key,
     	ChucVu varchar(30) not null,
     	Ten varchar(30) not null,
         NgVaoLam date,
@@ -20,57 +20,57 @@ create table NHANVIEN(
     	NgQL varchar(10),
     	CLB varchar(10),
         foreign key (NgQL) references NHANVIEN(MaNV),
-		foreign key (CLB) references CLB(MaCLB)
+	foreign key (CLB) references CLB(MaCLB)
 );
 
 alter table CLB
 add foreign key (NVDH) references NHANVIEN(MaNV);
 
 create table CAUTHU(
-		MaNV varchar(10) primary key,
+	MaNV varchar(10) primary key,
     	SoAo int not null,
     	DoiTruong boolean not null,
     	foreign key (MaNV) references NHANVIEN(MaNV)
 );
 
 create table HLV(
-		MaNV varchar(10) primary key,
+	MaNV varchar(10) primary key,
     	CapBacCS int not null,
     	KinhNghiem int, -- Số năm
     	foreign key (MaNV) references NHANVIEN(MaNV)
 );
 
 create table HOPDONG(
-		MaCLB varchar(10),
+	MaCLB varchar(10),
     	MaNV varchar(10),
     	VaiTro varchar(30),
     	NgBD date not null,
     	NgKT date not null,
     	GiaTri float, -- triệu euro
-		primary key (MaCLB, MaNV),
+	primary key (MaCLB, MaNV),
     	foreign key (MaCLB) references CLB(MaCLB),
     	foreign key (MaNV) references NHANVIEN(MaNV)
 );
 
 create table SAN(
-		MaSan varchar(10) primary key,
+	MaSan varchar(10) primary key,
     	TenSan varchar(30) not null,
     	DiaChi varchar(30),
         SucChua int,
     	CLBQLy varchar(10),
-		foreign key (CLBQLy) references CLB(MaCLB)
+	foreign key (CLBQLy) references CLB(MaCLB)
 );
 
 create table GIAIDAU(
-		MaGD varchar(10) primary key,
+	MaGD varchar(10) primary key,
     	TenGD varchar(30) not null,
     	NgBD date,
-		NgKT date,
+	NgKT date,
     	DiaDiem varchar(30)
 );
 
 create table TRANDAU(
-		MaTD varchar(10),
+	MaTD varchar(10),
     	TGThiDau datetime,
     	TySo varchar(3) not null,
     	CLB_A varchar(10),
@@ -85,7 +85,7 @@ create table TRANDAU(
 );
 
 create table THAMGIATRANDAU(
-		MaTD varchar(10),
+	MaTD varchar(10),
     	MaCLB varchar(10),
     	MaNV varchar(10),
     	PhutVaoSan int not null,
@@ -100,12 +100,12 @@ create table THAMGIATRANDAU(
 );
 
 create table DANHHIEU(
-		MaDH varchar(10) primary key,
+	MaDH varchar(10) primary key,
     	TenDH varchar(30) not null
 );
 
 create table CTDH(
-		MaDH varchar(10),
+	MaDH varchar(10),
     	MaGD varchar(10),
     	MaCLB varchar(10),
     	MaNV varchar(10),
@@ -131,7 +131,7 @@ insert into CLB values
 	('atbi','Athletic Bilbao', 'Bilbao, Tây Ban Nha', '1898-09-23','Athletic Club', NULL),
 	('reso','Real Sociedad', 'San Sebastián, Tây Ban Nha', '1909-09-07', 'Real Sociedad de Fútbol', NULL),
 	('vale','Valencia', 'Valencia, Tây Ban Nha', '1919-03-18','Valencia Club de Fútbol', NULL),
-    ('psg','Paris Saint-Germain','Paris, Pháp', '1970-08-12','Paris Saint-Germain Football Club',NULL);
+    	('psg','Paris Saint-Germain','Paris, Pháp', '1970-08-12','Paris Saint-Germain Football Club',NULL);
 
 insert into NHANVIEN values
 	('ctjola','Chủ tịch','Joan Laporta', '2021-03-17','25 Main Street, Barcelona, Tây Ban Nha','12345678',NULL,'barc'),
@@ -183,7 +183,7 @@ insert into SAN values
 	('mest','Mestalla', 'Valencia, Tây Ban Nha','55000','vale');
 	
 insert into TRANDAU values
-		('lfp2122','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2021'),
+	('lfp2122','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2021'),
     	('lfp2122','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2021'),
     	('fp2122','2022-04-18 22:00', '2-3', 'sevi', 'rema', 'rasp','lfp2021'),
     	('lfp1718','2018-01-22 18:00', '0-5', 'rebe', 'barc', 'bevi','lfp2017'),
