@@ -211,9 +211,9 @@ insert into THAMGIATRANDAU values
 	('209lfp2017','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
 	('209lfp2017','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
 	('290lfp2021','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
-	('337lfp2017','reso', 'juan7', 72, 94, 80,'Tiền đạo',1),
-	('337lfp2017','reso', 'juan7', 72, 94, 92,'Tiền đạo',1),
-	('329fp2021','rema','kabe9', 0, 95,92,'Tiền đạo',1),
+	('337lfp2017','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
+	('337lfp2017','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
+	('329fp2021','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
 	('329fp2021','sevi','ivra10', 0, 97,21,'Tiền vệ trung tâm',0);
 	
 insert into DANHHIEU values
