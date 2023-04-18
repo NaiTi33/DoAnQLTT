@@ -119,8 +119,8 @@ create table CTDH(
 
 
 insert into GIAIDAU values
-	('lfp2017', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha'),
-	('lfp2021', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha');
+	('lfp1718', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha'),
+	('lfp2122', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha');
 	
 insert into CLB values
 	('rema', 'Real Madrid', 'Madrid, Tây Ban Nha', '1902-03-06','Real Madrid Club de Fútbol', NULL),
@@ -183,11 +183,11 @@ insert into SAN values
 	('mest','Mestalla', 'Valencia, Tây Ban Nha','55000','vale');
 	
 insert into TRANDAU values
-	('lfp2122','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2021'),
-    	('lfp2122','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2021'),
-    	('fp2122','2022-04-18 22:00', '2-3', 'sevi', 'rema', 'rasp','lfp2021'),
-    	('lfp1718','2018-01-22 18:00', '0-5', 'rebe', 'barc', 'bevi','lfp2017'),
-    	('lfp1718','2018-04-20 18:00', '3-0', 'reso', 'atma','anoe','lfp2017');
+	('107lfp2122','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2021'),
+    	('209lfp2122','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2021'),
+    	('329lfp2122','2022-04-18 22:00', '2-3', 'sevi', 'rema', 'rasp','lfp2021'),
+    	('290lfp1718','2018-01-22 18:00', '0-5', 'rebe', 'barc', 'bevi','lfp1718'),
+    	('337lfp1718','2018-04-20 18:00', '3-0', 'reso', 'atma','anoe','lfp1718');
 
 insert into HOPDONG values
 	('barc', 'ctjola', 'Chủ tịch', '2021-03-17','2026-06-30',15),
@@ -208,13 +208,13 @@ insert into HOPDONG values
 	('vale', 'edca7', 'Cầu thủ', '2020-10-05', '2022-06-30', 8);
 	
 insert into THAMGIATRANDAU values
-	('209lfp2017','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
-	('209lfp2017','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
-	('290lfp2021','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
-	('337lfp2017','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
-	('337lfp2017','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
-	('329fp2021','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
-	('329fp2021','sevi','ivra10', 0, 97,21,'Tiền vệ trung tâm',0);
+	('209lfp1718','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
+	('209lfp1718','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
+	('290lfp2122','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
+	('337lfp1718','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
+	('337lfp1718','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
+	('329fp2122','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
+	('329fp2122','sevi','ivra10', 0, 97,21,'Tiền vệ trung tâm',0);
 	
 insert into DANHHIEU values
 	('001','CLB vô địch'),
@@ -226,17 +226,17 @@ insert into DANHHIEU values
 	('007','HLV xuất sắc nhất');
 	
 insert into CTDH values
-	('001','lfp2017','barc','lime30','2018-05-20'),
-	('001','lfp2017','barc','frjo21','2018-05-20'),
-	('002','lfp2017','atma','koke6','2018-05-20'),
-	('002','lfp2017','atma','jaob13','2018-05-20'),
-	('003','lfp2017','barc','lime30','2018-11-12'),
-	('004','lfp2017','barc','lime30','2018-11-12'),
-	('005','lfp2017','atma','jaob13','2018-11-12'),
-	('001','lfp2021','rema','kabe9','2022-05-22'),
-	('001','lfp2021','rema','vnju20','2022-05-22'),
-	('001','lfp2021','rema','thco1','2022-05-22'),
-	('002','lfp2021','barc','frjo21','2022-05-22'),
-	('003','lfp2021','rema','kabe9','2022-11-21'),
-	('004','lfp2021','rema','kabe9','2022-11-21'),
-	('005','lfp2021','atma','jaob13','2018-11-21');
+	('001','lfp1718','barc','lime30','2018-05-20'),
+	('001','lfp1718','barc','frjo21','2018-05-20'),
+	('002','lfp1718','atma','koke6','2018-05-20'),
+	('002','lfp1718','atma','jaob13','2018-05-20'),
+	('003','lfp1718','barc','lime30','2018-11-12'),
+	('004','lfp1718','barc','lime30','2018-11-12'),
+	('005','lfp1718','atma','jaob13','2018-11-12'),
+	('001','lfp2122','rema','kabe9','2022-05-22'),
+	('001','lfp2122','rema','vnju20','2022-05-22'),
+	('001','lfp2122','rema','thco1','2022-05-22'),
+	('002','lfp2122','barc','frjo21','2022-05-22'),
+	('003','lfp2122','rema','kabe9','2022-11-21'),
+	('004','lfp2122','rema','kabe9','2022-11-21'),
+	('005','lfp2122','atma','jaob13','2018-11-21');
