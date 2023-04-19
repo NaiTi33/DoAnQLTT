@@ -260,19 +260,38 @@ insert into HOPDONG values
 	('vale', 'edca7', 'Cầu thủ', '2020-10-05', '2022-06-30', 8);
 	
 insert into THAMGIATRANDAU values
+	('lfp2122cano2410','barc', 'frjo21', 0, 77, -1,'Tiền vệ cánh trái',0),
+	('lfp2122cano2410','rema','kabe9', 0, 94, -1,'Tiền đạo cắm',0),
+	('lfp2122cano2410','rema','tk8', 0, 94, -1,'Tiền vệ cánh trái',0),
+	('lfp2122cano2410','rema','lm10', 0, 94, -1,'Tiền vệ cánh phải',0),
+	('lfp2122cano2410','rema','vnju20', 0, 87, -1,'Tiền đạo cánh trái',0),
+	('lfp2122cano2410','rema','thco1', 0, 94, -1,'Thủ môn',0),
+	('lfp2122cano2410','rema', 'hlvcaan', -1, -1, -1,'HLV',0),
+	
 	('lfp1718bevi2201','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
 	('lfp1718bevi2201','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
 	('lfp1718bevi2201','barc', 'ivra10', 0, 93, 59,'Tiền vệ trung tâm',0),
 	
 	('lfp2122sabe2103','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
+	('lfp2122sabe2103','rema','tk8', 0, 46, -1,'Tiền vệ trái',0),
+	('lfp2122sabe2103','rema','lm10', 0, 94, -1,'Tiền đạo trái',0),
+	('lfp2122sabe2103','rema','vnju20', 0, 94, -1,'Tiền đạo phải',0),
+	('lfp2122sabe2103','rema','thco1', 0, 94, -1,'Thủ môn',0),
 	('lfp2122sabe2103','rema', 'hlvcaan', -1, -1, -1,'HLV',0),
 	
 	('lfp1718anoe2004','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
 	('lfp1718anoe2004','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
+	('lfp1718anoe2004','atma', 'koke6', 0, 94, -1,'Tiền vệ cánh phải',1),
+	('lfp1718anoe2004','atma', 'jaob13', 0, 94, -1,'Thủ môn',0),
 	('lfp1718anoe2004','atma', 'hlvdisi', -1, -1, -1,'HLV',0),
 	
-	('lfp2122rasp1804','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
+	('lfp2122rasp1804','rema','kabe9', 0, 95, 92,'Tiền đạo cắm',1),
+	('lfp2122rasp1804','rema','tk8', 0, 100, -1,'Tiền vệ trung tâm',0),
+	('lfp2122rasp1804','rema','lm10', 0, 81, -1,'Tiền vệ cánh phải',0),
+	('lfp2122rasp1804','rema','vnju20', 0, 100, -1,'Tiền đạo cánh trái',0),
+	('lfp2122rasp1804','rema','thco1', 0, 100, -1,'Thủ môn',0),
 	('lfp2122rasp1804','rema', 'hlvcaan', -1, -1, -1,'HLV',0),
+	('lfp2122rasp1804','sevi','ivra10', 0, 100, 21,'Tiền vệ trung tâm',0);
 	
 	('ckc12122','rema','kabe9', 0, 95,-1,'Tiền đạo cắm',0),
 	('ckc12122','rema','vnju20', 0, 93,59,'Tiền đạo trái',0),
@@ -321,16 +340,12 @@ insert into THAMGIATRANDAU values
 	('bkc12122EM0405','LIV','ms11', 0, 95,74,'Tiền đạo phải',1),
 	('bkc12122EM0405','LIV','al1', 0, 95,-1,'Thủ môn',0),
 	
-	
-	
 	('bkc12122AF2804','VIL','gmb7', 0, 95,-1,'Tiền đạo trái',0),
 	('bkc12122AF2804','VIL','gr13', 0, 95,-1,'Thủ môn',0),
 	('bkc12122AF2804','VIL','hlvqs', -1, -1,-1,'HLV',0),
 	('bkc12122AF2804','LIV','hlvjk', -1, -1,-1,'HLV',0),
 	('bkc12122AF2804','LIV','ms11', 0, 95,-1,'Tiền đạo phải',0),
 	('bkc12122AF2804','LIV','al1', 0, 95,-1,'Thủ môn',1),
-	
-	('lfp2122rasp1804','sevi','ivra10', 0, 97, 21,'Tiền vệ trung tâm',0);
 	
 insert into DANHHIEU values
 	('001','CLB vô địch'),
