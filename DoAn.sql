@@ -97,7 +97,7 @@ create table THAMGIATRANDAU(
     	primary key (MaTD, MaCLB, MaNV,PhutGhiBan),
     	foreign key (MaTD) references TRANDAU(MaTD),
     	foreign key (MaCLB) references CLB(MaCLB),
-    	foreign key (MaNV) references CAUTHU(MaNV)
+    	foreign key (MaNV) references NHANVIEN(MaNV)
 );
 
 create table DANHHIEU(
@@ -262,12 +262,17 @@ insert into HOPDONG values
 insert into THAMGIATRANDAU values
 	('lfp1718bevi2201','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
 	('lfp1718bevi2201','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
+	('lfp1718bevi2201','barc', 'ivra10', 0, 93, 59,'Tiền vệ trung tâm',0),
 	
 	('lfp2122sabe2103','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
+	('lfp2122sabe2103','rema', 'hlvcaan', -1, -1, -1,'HLV',0),
 	
 	('lfp1718anoe2004','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
 	('lfp1718anoe2004','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
+	('lfp1718anoe2004','atma', 'hlvdisi', -1, -1, -1,'HLV',0),
+	
 	('lfp2122rasp1804','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
+	('lfp2122rasp1804','rema', 'hlvcaan', -1, -1, -1,'HLV',0),
 	
 	('ckc12122','rema','kabe9', 0, 95,-1,'Tiền đạo cắm',0),
 	('ckc12122','rema','vnju20', 0, 93,59,'Tiền đạo trái',0),
@@ -325,7 +330,7 @@ insert into THAMGIATRANDAU values
 	('bkc12122AF2804','LIV','ms11', 0, 95,-1,'Tiền đạo phải',0),
 	('bkc12122AF2804','LIV','al1', 0, 95,-1,'Thủ môn',1),
 	
-	('329fp2021','sevi','ivra10', 0, 97,21,'Tiền vệ trung tâm',0);
+	('lfp2122rasp1804','sevi','ivra10', 0, 97, 21,'Tiền vệ trung tâm',0);
 	
 insert into DANHHIEU values
 	('001','CLB vô địch'),
