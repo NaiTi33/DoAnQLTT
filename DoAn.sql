@@ -115,7 +115,7 @@ create table CTDH(
     	foreign key (MaDH) references DANHHIEU(MaDH),
     	foreign key (MaGD) references GIAIDAU(MaGD),
     	foreign key (MaCLB) references CLB(MaCLB),
-    	foreign key (MaNV) references CAUTHU(MaNV)
+    	foreign key (MaNV) references NHANVIEN(MaNV)
 );
 
 
@@ -379,3 +379,130 @@ insert into CTDH values
 	('002','c12122','LIV','ms11','2022-05-29'),
 	('002','c12122','LIV','al1','2022-05-29'),
 	('005','lfp2122','atma','jaob13','2018-11-21');
+	
+-- EPL
+	
+insert into GIAIDAU values ('EPL2122','English Premier League','2021-08-13','2022-05-22','United Kingdom');
+
+
+insert into CLB (MACLB,TenCLB,NgayLap,DiaDiem,CTy,NVDH) values('MCI','Manchester City','1880-04-16','Manchester, United Kingdom','City Football Group Limited',NULL),
+						('LIV','Liverpool','1892-06-03','Liverpool, United Kingdom','Liverpool Football Club',NULL),
+						('CHE','Chelsea','1905-03-10','London, United Kingdom','Chelsea Football Club Limited',NULL),
+						('TOT','Tottenham Hotspur','1882-09-05','London, United Kingdom','Tottenham Hotspur Football Club Limited',NULL),
+						('ARS','Arsenal','1886-02-16','London, United Kingdom','The Arsenal Football Club plc',NULL),
+						('MUN','Manchester United','1878-03-06','Manchester, United Kingdom','Manchester United Football Club Limited',NULL);
+
+
+insert into NHANVIEN (MaNV,ChucVu,Ten,NgVaoLam,Ngketthuc,SDT,DiaChi,NgQL,CLB) values ('hlvole','HLV','Ole Solskjaer', '2019-03-29', '2021-11-21', '7891237881', 'Manchester, United Kingdom', NULL, 'MUN'),
+																					('rf10','Cầu thủ','Marcus Rashford', '2016-02-25', NULL, '5298765432', 'Manchester, United Kingdom', 'hlvole', 'MUN'),
+                                                                                    ('cr07','Cầu thủ','Cristiano Ronaldo', '2021-08-27', '2022-11-23', '0612345678', 'Manchester, United Kingdom', 'hlvole', 'MUN'),
+																					('ctra','Chủ tịch','Richard Arnold', '2022-01-06', NULL, '4671238989', 'Manchester, United Kingdom', NULL, 'MUN'),
+                                                                                    ('vd04','Cầu thủ','Virgil van Dijk', '2017-12-27', NULL, '6901237619', 'Liverpool, United Kingdom', 'hlvjk', 'LIV'),
+                                                                                    ('rf09','Cầu thủ','Roberto Firmino', '2015-07-06', NULL, '2012345678', 'Liverpool, United Kingdom', 'hlvjk', 'LIV'),
+                                                                                    ('em31','Cầu thủ','Ederson Moraes', '2017-07-01', NULL, '5298765432', 'Manchester, United Kingdom', 'hlvp', 'MCI'),
+                                                                                    ('pp47','Cầu thủ','Phil Foden', '2017-07-01', NULL, '3412348912', 'Manchester, United Kingdom','hlvp', 'MCI'),
+                                                                                     ('hlvtc','HLV','Thomas Tuchel','2021-01-26','2022-09-07','2351892320','London, United Kingdom',NULL,'CHE'),
+                                                                                    ('kepa01','Cầu thủ','Kepa Arrizabalaga', '2018-08-08', NULL, '5551234567', 'London, United Kingdom', 'hlvtc', 'CHE'),
+                                                                                    ('kai29','Cầu thủ','Kai Havertz', '2020-09-04', NULL, '3412348912', 'London, United Kingdom','hlvtc', 'CHE'),
+                                                                                    ('ctrm','Chủ tịch','Roman Abramovich','2003-07-01','2022-05-07','6901237619','London, United Kingdom',NULL,'CHE'),
+                                                                                    ('hlvata','HLV','Mikel Arteta', '2019-12-20', NULL, '4671238989', 'London, United Kingdom', NULL, 'ARS'),
+                                                                                    ('auba14','Cầu thủ','Pierre-Emerick Aubameyang', '2018-01-31', '2022-04-02', '0612345678', 'London, United Kingdom', 'hlvata', 'ARS'),
+                                                                                    ('gm35','Cầu thủ','Gabriel Martinelli', '2019-07-02', NULL, '1234567890', 'London, United Kingdom', 'hlvata', 'ARS'),
+                                                                                    ('Ctsk','Chủ tịch','Stan Kroenke', '2018-08-07', NULL, '2351892320', 'London, United Kingdom', NULL, 'ARS'),
+                                                                                    ('hlvnuno','HLV','Nuno Espirito Santo', '2021-06-30', '2021-11-01', '1234567894', 'London, United Kingdom', NULL, 'TOT'),
+                                                                                    ('son07','Cầu thủ','Heung-Min Son', '2015-08-28', NULL, '3412348912', 'London, United Kingdom', 'hlvnuno', 'TOT'),
+                                                                                    ('kane09','Cầu thủ','Harry Kane', '2009-07-01', NULL, '2012345678', 'London, United Kingdom','hlvnuno', 'TOT'),
+                                                                                    ('ctlv','Chủ tịch','Daniel Levy', '2001-02-22', NULL, '6123456780', 'London, United Kingdom', NULL, 'TOT');
+
+insert into SAN values
+	('OTF','Old Trafford','Manchester, Anh',74310,'MUN'),
+	('THS','Tottenham Hotspur Stadium','London, Anh',62850,'TOT'),
+	('EMS','Emirates Stadium','London, Anh',60704,'ARS'),
+	('SB','Stamford Bridge','London, Anh',40341,'CHE');
+	
+insert into TRANDAU values
+	('304EPL2122','2022-04-10 22:30','2-2','MCI','LIV','ES','EPL2122'),
+	('90EPL2122','2021-10-24 22:30','0-5','MUN','LIV','OTF','EPL2122'),
+	('80EPL2122','2021-08-22 22:30','0-2','ARS','CHE','EMS','EPL2122'),
+	('02EPL2122','2021-08-15 22:30','1-0','TOT','MCI','THS','EPL2122');
+
+insert into HOPDONG values
+	('MUN','rf10','Cầu thủ','2016-02-25','2023-06-30',0),
+	('MUN','cr07','Cầu thủ','2021-08-27','2023-06-30',15),
+	('MUN','hlvole','HLV','2019-03-28','2024-06-30',0),
+	('MUN','ctra','Chủ tịch','2022-01-06','2026-06-30',0),	
+	('LIV','vd04','Cầu thủ','2017-12-27','2023-06-30',84.65),	
+	('LIV','rf09','Cầu thủ','2015-07-06','2023-06-30',41),	
+	('MCI','em31','Cầu thủ','2017-07-01','2025-06-30',40),	
+	('MCI','pp47','Cầu thủ','2017-07-01','2024-06-30',0),	
+	('CHE','kepa01','Cầu thủ','2018-08-08','2025-06-30',80),	
+	('CHE','kai29','Cầu thủ','2020-09-04','2025-06-30',80),
+	('CHE','hlvtc','HLV','2021-01-26','2024-06-30',0),
+	('CHE','ctrm','Chủ tịch','2003-07-01','2024-06-30',0),
+	('ARS','auba14','Cầu thủ','2018-01-31','2023-06-30',63.75),	
+	('ARS','gm35','Cầu thủ','2019-07-02','2024-06-30',7),
+	('ARS','Hlvata','HLV','2019-12-20','2023-06-30',0),
+	('ARS','Ctsk','Chủ tịch','2018-08-07','2026-06-30',0),
+	('TOT','son07','Cầu thủ','2015-08-28','2023-06-30',30),
+	('TOT','kane09','Cầu thủ','2009-07-01','2024-06-30',0),	
+	('TOT','Hlvnuno','HLV','2021-06-30','2023-06-30',0),
+	('TOT','ctlv','Chủ tịch','2001-02-22','2028-06-30',0);
+
+insert into CAUTHU values 
+	('rf10',10,0),
+	('cr07',7,1),
+	('vd04',4,1),
+	('rf09',9,0),
+	('em31',31,0),
+	('pp47',47,0),
+	('kepa01',1,0),
+	('kai29',29,0),
+	('auba14',14,1),
+	('gm35',35,0),
+	('son07',7,0),
+	('kane09',9,1);
+
+insert into HLV values
+	('hlvole',1,5),
+	('Hlvata',1,5),
+	('hlvtc',1,5),
+	('Hlvnuno',1,5);
+	
+insert into THAMGIATRANDAU values
+	('304EPL2122','MCI','em31',0,91,69,'Thủ môn',0),		
+	('304EPL2122','MCI','pp47',0,91,69,'Tiền đạo cánh trái',0),
+	('304EPL2122','MCI','hlvp',-1,-1,-1,'HLV',0),		
+	('304EPL2122','LIV','hlvjk',-1,-1,-1,'HLV',0),
+	('304EPL2122','LIV','vd04',0,91,-1,'Trung vệ',0),	
+	('304EPL2122','LIV','rf09',68,91,59,'Tiền đạo cắm',0);,		
+	('90EPL2122','LIV','vd04',0,90,-1,'Trung vệ',0),	
+	('90EPL2122','LIV','rf09',0,76,5,'Tiền đạo cắm',0),		
+	('90EPL2122','LIV','hlvjk',-1,-1,-1,'HLV',0),		
+	('90EPL2122','MUN','rf10',0,90,-1,'Tiền đạo cánh trái',0),		
+	('90EPL2122','MUN','cr07',0,90,-1,'Tiền đạo cắm',0),		
+	('90EPL2122','MUN','hlvole',-1,-1,-1,'HLV',0),	
+	('80EPL2122','CHE','kai29',0,90,15,'Tiền đạo cánh trái',1),		
+	('80EPL2122','CHE','kepa01',0,90,-1,'Thủ môn',0),		
+	('80EPL2122','CHE','hlvtc',-1,-1,-1,'HLV',0),		
+	('80EPL2122','ARS','auba14',0,90,-1,'Tiền đạo cắm',0),		
+	('80EPL2122','ARS','gm35',0,90,-1,'Tiền đạo cánh trái',0),		
+	('80EPL2122','ARS','Hlvata',-1,-1,-1,'HLV',0),
+	('02EPL2122','TOT','kane09',0,96,0,'Tiền đạo cắm',0),		
+	('02EPL2122','TOT','son07',0,96,55,'Tiền đạo cắm',1),
+	('02EPL2122','TOT','hlvnuno',-1,-1,-1,'HLV',0),		
+	('02EPL2122','MCI','em31',0,96,-1,'Thủ môn',0),
+	('02EPL2122','MCI','pp47',0,96,-1,'Tiền đạo cánh trái',0),		
+	('02EPL2122','MCI','hlvp',-1,-1,-1,'HLV',0);
+	
+
+insert into CTDH values 
+	('001','EPL2122','MCI','em31','2022-05-22'),
+	('001','EPL2122','MCI','pp47','2022-05-22'),
+	('002','EPL2122','MUN','rf10','2022-05-22'),
+	('002','EPL2122','MUN','cr07','2022-05-22'),
+	('005','EPL2122','MCI','em31','2022-05-22'),
+	('006','EPL2122','MCI','pp47','2022-05-22'),
+	('001','EPL2122','MCI','hlvp','2022-05-22'),
+	('002','EPL2122','MUN','hlvole','2022-05-22'),
+	('007','EPL2122','LIV','hlvjk','2022-05-22');
+
