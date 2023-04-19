@@ -186,10 +186,21 @@ insert into CAUTHU values
 	('dasi21', 21, 0),
 	('unsi13', 13, 0),
 	('roma9', 9, 1),
+	('lm10', 10, 0),
+	('tk8', 8, 0),
+	('mh11', 11, 0),
+	('al1', 1, 1),
+	('gs9', 9, 0),
+	('kdb17', 17, 0),
+	('gmb7', 7, 0),
+	('gr13', 13, 1),
 	('edca7', 7, 0);
 	
 insert into HLV values
 	('hlvcaan',1, 30),
+	('hlvjk',1, 31),
+	('hlvp',1, 22),
+	('hlvqs',1, 33),
 	('hlvdisi',1, 10);
 
 insert into SAN values
