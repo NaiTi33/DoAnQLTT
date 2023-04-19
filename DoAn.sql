@@ -120,8 +120,8 @@ create table CTDH(
 
 
 insert into GIAIDAU values
-	('lfp2017', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha'),
-	('lfp2021', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha'),
+	('lfp1718', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha'),
+	('lfp2122', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha'),
 	('c12122', 'Champions League', '2021-06-22', '2022-05-29', 'Pháp');
 	
 insert into CLB values
@@ -219,16 +219,16 @@ insert into SAN values
 	
 	
 insert into TRANDAU values
-	('lfp2122cano2410','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2021'),
-    	('lfp2122sabe2103','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2021'),
-    	('fp2122rasp1804','2022-04-18 22:00', '2-3', 'sevi', 'rema', 'rasp','lfp2021'),
-    	('lfp1718bevi2201','2018-01-22 18:00', '0-5', 'rebe', 'barc', 'bevi','lfp2017'),
+	('lfp2122cano2410','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2122'),
+    	('lfp2122sabe2103','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2122'),
+    	('lfp2122rasp1804','2022-04-18 22:00', '2-3', 'sevi', 'rema', 'rasp','lfp2122'),
+    	('lfp1718bevi2201','2018-01-22 18:00', '0-5', 'rebe', 'barc', 'bevi','lfp1718'),
 	('ckc12122','2022-05-29 18:00', '0-1', 'LIV', 'rema', 'sdf','c12122'),
 	('bkc12122SB0505','2022-05-05 18:00', '3-1', 'rema', 'MCI', 'sabe','c12122'),
 	('bkc12122ES2704','2022-04-27 18:00', '4-3', 'MCI', 'rema', 'ES','c12122'),
 	('bkc12122AF2804','2022-04-28 18:00', '0-0', 'LIV', 'VIL', 'AF','c12122'),
 	('bkc12122EM0405','2022-05-04 18:00', '3-2', 'LIV', 'VIL', 'EM','c12122'),
-    	('lfp1718anoe2004','2018-04-20 18:00', '3-0', 'reso', 'atma','anoe','lfp2017');
+    	('lfp1718anoe2004','2018-04-20 18:00', '3-0', 'reso', 'atma','anoe','lfp1718');
 
 insert into HOPDONG values
 	('barc', 'ctjola', 'Chủ tịch', '2021-03-17','2026-06-30',15),
@@ -260,12 +260,14 @@ insert into HOPDONG values
 	('vale', 'edca7', 'Cầu thủ', '2020-10-05', '2022-06-30', 8);
 	
 insert into THAMGIATRANDAU values
-	('209lfp2017','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
-	('209lfp2017','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
-	('290lfp2021','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
-	('337lfp2017','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
-	('337lfp2017','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
-	('329fp2021','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
+	('lfp1718bevi2201','barc', 'lime30', 0, 93, 64,'Tiền đạo cánh phải',1),
+	('lfp1718bevi2201','barc', 'lime30', 0, 93, 80,'Tiền đạo cánh phải',1),
+	
+	('lfp2122sabe2103','barc', 'frjo21', 0, 71, -1,'Tiền vệ trung tâm',0),
+	
+	('lfp1718anoe2004','reso', 'juan7', 72, 94, 80,'Tiền đạo cắm',1),
+	('lfp1718anoe2004','reso', 'juan7', 72, 94, 92,'Tiền đạo cắm',1),
+	('lfp2122rasp1804','rema','kabe9', 0, 95,92,'Tiền đạo cắm',1),
 	
 	('ckc12122','rema','kabe9', 0, 95,-1,'Tiền đạo cắm',0),
 	('ckc12122','rema','vnju20', 0, 93,59,'Tiền đạo trái',0),
@@ -335,19 +337,19 @@ insert into DANHHIEU values
 	('007','HLV xuất sắc nhất');
 	
 insert into CTDH values
-	('001','lfp2017','barc','lime30','2018-05-20'),
-	('001','lfp2017','barc','frjo21','2018-05-20'),
-	('002','lfp2017','atma','koke6','2018-05-20'),
-	('002','lfp2017','atma','jaob13','2018-05-20'),
-	('003','lfp2017','barc','lime30','2018-11-12'),
-	('004','lfp2017','barc','lime30','2018-11-12'),
-	('005','lfp2017','atma','jaob13','2018-11-12'),
-	('001','lfp2021','rema','kabe9','2022-05-22'),
-	('001','lfp2021','rema','vnju20','2022-05-22'),
-	('001','lfp2021','rema','thco1','2022-05-22'),
-	('002','lfp2021','barc','frjo21','2022-05-22'),
-	('003','lfp2021','rema','kabe9','2022-11-21'),
-	('004','lfp2021','rema','kabe9','2022-11-21'),
+	('001','lfp1718','barc','lime30','2018-05-20'),
+	('001','lfp1718','barc','frjo21','2018-05-20'),
+	('002','lfp1718','atma','koke6','2018-05-20'),
+	('002','lfp1718','atma','jaob13','2018-05-20'),
+	('003','lfp1718','barc','lime30','2018-11-12'),
+	('004','lfp1718','barc','lime30','2018-11-12'),
+	('005','lfp1718','atma','jaob13','2018-11-12'),
+	('001','lfp2122','rema','kabe9','2022-05-22'),
+	('001','lfp2122','rema','vnju20','2022-05-22'),
+	('001','lfp2122','rema','thco1','2022-05-22'),
+	('002','lfp2122','barc','frjo21','2022-05-22'),
+	('003','lfp2122','rema','kabe9','2022-11-21'),
+	('004','lfp2122','rema','kabe9','2022-11-21'),
 	('001','c12122','rema','bz10','2022-05-29'),
 	('003','c12122','rema','bz10','2022-05-29'),
 	('007','c12122','rema','ca14','2022-05-29'),
@@ -356,4 +358,4 @@ insert into CTDH values
 	('001','c12122','rema','tk8','2022-05-29'),
 	('002','c12122','LIV','ms11','2022-05-29'),
 	('002','c12122','LIV','al1','2022-05-29'),
-	('005','lfp2021','atma','jaob13','2018-11-21');
+	('005','lfp2122','atma','jaob13','2018-11-21');
