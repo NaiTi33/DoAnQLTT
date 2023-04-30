@@ -8,6 +8,7 @@ create table CLB(
     	NgayLap datetime,
     	CTy varchar(50),
     	NVDH varchar(10)
+        
 );
 
 create table NHANVIEN(
@@ -15,7 +16,7 @@ create table NHANVIEN(
     	ChucVu varchar(30) not null,
     	Ten varchar(30) not null,
         NgVaoLam date,
-	Ngketthuc date,
+	NgKetThuc date,
     	DiaChi varchar(100),
     	SDT varchar(10),
     	NgQL varchar(10),
@@ -23,6 +24,7 @@ create table NHANVIEN(
         foreign key (NgQL) references NHANVIEN(MaNV),
 	foreign key (CLB) references CLB(MaCLB)
 );
+alter table NHANVIEN add constraint ck_NV check (NgVaoLam<NgKetThuc);
 
 alter table CLB
 add foreign key (NVDH) references NHANVIEN(MaNV);
@@ -52,6 +54,7 @@ create table HOPDONG(
     	foreign key (MaCLB) references CLB(MaCLB),
     	foreign key (MaNV) references NHANVIEN(MaNV)
 );
+alter table HOPDONG add constraint ck_HD check (NgBD<NgKT);
 
 create table SAN(
 	MaSan varchar(10) primary key,
@@ -69,16 +72,17 @@ create table GIAIDAU(
 	NgKT date,
     	DiaDiem varchar(30)
 );
+alter table GIAIDAU add constraint ck_GD check (NgBD<NgKT);
 
 create table TRANDAU(
 	MaTD varchar(20),
     	TGThiDau datetime,
     	TySo varchar(3) not null,
-    	CLB_A varchar(10),
-    	CLB_B varchar(10),
+    	CLB_A varchar(10) not null,
+    	CLB_B varchar(10) not null,
     	MaSan varchar(10),
     	MaGD varchar(10),
-        primary key (MaTD, CLB_A, CLB_B),
+        primary key (MaTD),
     	foreign key (CLB_A) references CLB(MaCLB),
     	foreign key (CLB_B) references CLB(MaCLB),
     	foreign key (MaSan) references SAN(MaSan),
@@ -131,13 +135,9 @@ insert into CLB values
 	('atma','Atlético Madrid', 'Madrid, Tây Ban Nha', '1903-04-26','Club Atlético de Madrid', NULL),
 	('sevi','Sevilla', 'Sevilla, Tây Ban Nha', '1890-01-25','Sevilla Fútbol Club', NULL),
 	('rebe','Real Betis', 'Sevilla, Tây Ban Nha', '1907-09-12','Real Betis Balompié', NULL),
-    
 	('atbi','Athletic Bilbao', 'Bilbao, Tây Ban Nha', '1898-09-23','Athletic Club', NULL),
-    
 	('reso','Real Sociedad', 'San Sebastián, Tây Ban Nha', '1909-09-07', 'Real Sociedad de Fútbol', NULL),
-    
 	('vale','Valencia', 'Valencia, Tây Ban Nha', '1919-03-18','Valencia Club de Fútbol', NULL),
-    
 	('MCI','Manchester City', 'Anh', '1894-04-16','City Football Group Limited', NULL),
 	('LIV','Liverpool', 'Anh', '1892-06-03','Tập đoàn Thể thao Fenway', NULL),
 	('VIL','Villarreal', 'Tây Ban Nha', '1923-03-10','Villarreal Club de Fútbol', NULL),
@@ -157,15 +157,15 @@ insert into NHANVIEN values
 	('cttw','Chủ tịch','Tom Werner', '2012-12-01',NULL,'Liverpool, Anh','11111678',NULL,'LIV'),
 	('ctkam','Chủ tịch','Khaldoon Al Mubarak', '2013-01-01',NULL,'Manchester City, Anh','11661666',NULL,'MCI'),
 	('ctfra','Chủ tịch','Fernando Roig Alfonso', '2000-12-01',NULL,'Tây Ban Nha','11555252',NULL,'VIL'),
-    	('hlvole','HLV','Ole Solskjaer', '2019-03-29', '2021-11-21', 'Manchester, United Kingdom', '78964881', NULL, 'MUN'),
-    	('hlvtc','HLV','Thomas Tuchel','2021-01-26','2022-09-07','London, United Kingdom','23576320',NULL,'CHE'),
-    	('hlvata','HLV','Mikel Arteta', '2019-12-20', NULL, 'London, United Kingdom', '46428989', NULL, 'ARS'),
-    	('hlvnuno','HLV','Nuno Espirito Santo', '2021-06-30', '2021-11-01', 'London, United Kingdom', '64767894', NULL, 'TOT'),
-	('hlvcaan','HLV','Carlo Ancelotti', '2021-06-01',NULL, '15 Lombardy Lane, Madrid, Tây Ban Nha', '23456789',NULL,'rema'),
+    	('hlvole','HLV','Ole Solskjaer', '2019-03-29', '2021-11-21', 'Manchester, United Kingdom', '78964881', 'ctra', 'MUN'),
+    	('hlvtc','HLV','Thomas Tuchel','2021-01-26','2022-09-07','London, United Kingdom','23576320','ctrm','CHE'),
+    	('hlvata','HLV','Mikel Arteta', '2019-12-20', NULL, 'London, United Kingdom', '46428989', 'ctsk', 'ARS'),
+    	('hlvnuno','HLV','Nuno Espirito Santo', '2021-06-30', '2021-11-01', 'London, United Kingdom', '64767894', 'ctlv', 'TOT'),
+	('hlvcaan','HLV','Carlo Ancelotti', '2021-06-01',NULL, '15 Lombardy Lane, Madrid, Tây Ban Nha', '23456789','ctfp','rema'),
 	('hlvdisi','HLV','Diego Simeone', '2011-12-23',NULL, '10 Madrid Avenue, Madrid, Tây Ban Nha', '34567890',NULL,'atma'),
-	('hlvjk','HLV','Jürgen Klopp', '2015-10-08',NULL,'Liverpool, Anh','14611678',NULL,'LIV'),
-	('hlvp','HLV','Pep Guardiola', '2016-01-02',NULL,'Manchester City, Anh','11661556',NULL,'MCI'),
-	('hlvqs','HLV','Quique Setién', '2022-10-25',NULL,'Tây Ban Nha','11525252',NULL,'VIL'),
+	('hlvjk','HLV','Jürgen Klopp', '2015-10-08',NULL,'Liverpool, Anh','14611678','cttw','LIV'),
+	('hlvp','HLV','Pep Guardiola', '2016-01-02',NULL,'Manchester City, Anh','11661556','ctkam','MCI'),
+	('hlvqs','HLV','Quique Setién', '2022-10-25',NULL,'Tây Ban Nha','11525252','ctfra','VIL'),
 	('kabe9','Cầu thủ','Karim Benzema', '2009-07-01',NULL, '20 Bernabeu Street, Madrid, Tây Ban Nha', '45678901','hlvcaan','rema'),
 	('lm10','Cầu thủ','Luka Modrić', '2012-08-27',NULL, ' khu La Moraleja, Madrid, Tây Ban Nha', '85678901','hlvcaan','rema'),
 	('tk8','Cầu thủ','Toni Kroos', '2014-07-17',NULL, ' La Finca, Madrid, Tây Ban Nha', '891831','hlvcaan','rema'),
@@ -188,7 +188,7 @@ insert into NHANVIEN values
 	('roma9','Cầu thủ','Roger Martí', '2013-07-01',NULL, '20 Valencia Street, Valencia, Tây Ban Nha', '56789012',NULL,'vale'),
 	('edca7','Cầu thủ','Edinson Cavani', '2020-10-05',NULL, '10 Levante Boulevard, Valencia, Tây Ban Nha', '67890123',NULL,'vale'),
 	('rf10','Cầu thủ','Marcus Rashford', '2016-02-25', NULL, 'Manchester, United Kingdom', '52987653', 'hlvole', 'MUN'),
-    	('cr07','Cầu thủ','Cristiano Ronaldo', '2021-08-27', '2022-11-23', 'Manchester, United Kingdom', '06126456', 'hlvole', 'MUN'),
+   	('cr07','Cầu thủ','Cristiano Ronaldo', '2021-08-27', '2022-11-23', 'Manchester, United Kingdom', '06126456', 'hlvole', 'MUN'),
 	('vd04','Cầu thủ','Virgil van Dijk', '2017-12-27', NULL, 'Liverpool, United Kingdom', '69012376', 'hlvjk', 'LIV'),
 	('rf09','Cầu thủ','Roberto Firmino', '2015-07-06', NULL, 'Liverpool, United Kingdom', '20123456', 'hlvjk', 'LIV'),
 	('em31','Cầu thủ','Ederson Moraes', '2017-07-01', NULL, 'Manchester, United Kingdom', '52987654', 'hlvp', 'MCI'),
@@ -253,7 +253,7 @@ insert into HLV values
 	('hlvp',1, 22),
 	('hlvqs',1, 33),
 	('hlvdisi',1, 10),
-	('hlvole',1,5),
+    	('hlvole',1,5),
 	('hlvata',1,5),
 	('hlvtc',1,5),
 	('hlvnuno',1,5);
@@ -484,3 +484,4 @@ insert into CTDH values
 	('001','EPL2122','MCI','hlvp','2022-05-22'),
 	('002','EPL2122','MUN','hlvole','2022-05-22'),
 	('007','EPL2122','LIV','hlvjk','2022-05-22');
+
