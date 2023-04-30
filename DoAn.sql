@@ -8,7 +8,6 @@ create table CLB(
     	NgayLap datetime,
     	CTy varchar(50),
     	NVDH varchar(10)
-        
 );
 
 create table NHANVIEN(
@@ -70,7 +69,9 @@ create table GIAIDAU(
     	TenGD varchar(30) not null,
     	NgBD date,
 	NgKT date,
-    	DiaDiem varchar(30)
+    	DiaDiem varchar(30),
+        CLBVoDich varchar(10),
+        foreign key (CLBVoDich) references CLB(MaCLB)
 );
 alter table GIAIDAU add constraint ck_GD check (NgBD<NgKT);
 
@@ -123,11 +124,7 @@ create table CTDH(
 );
 
 
-insert into GIAIDAU values
-	('EPL2122','English Premier League','2021-08-13','2022-05-22','United Kingdom'),
-	('lfp1718', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha'),
-	('lfp2122', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha'),
-	('c12122', 'Champions League', '2021-06-22', '2022-05-29', 'Pháp');
+
 	
 insert into CLB values
 	('rema', 'Real Madrid', 'Madrid, Tây Ban Nha', '1902-03-06','Real Madrid Club de Fútbol', NULL),
@@ -160,7 +157,7 @@ insert into NHANVIEN values
     	('hlvole','HLV','Ole Solskjaer', '2019-03-29', '2021-11-21', 'Manchester, United Kingdom', '78964881', 'ctra', 'MUN'),
     	('hlvtc','HLV','Thomas Tuchel','2021-01-26','2022-09-07','London, United Kingdom','23576320','ctrm','CHE'),
     	('hlvata','HLV','Mikel Arteta', '2019-12-20', NULL, 'London, United Kingdom', '46428989', 'ctsk', 'ARS'),
-    	('hlvnuno','HLV','Nuno Espirito Santo', '2021-06-30', '2021-11-01', 'London, United Kingdom', '64767894', 'ctlv', 'TOT'),
+   	('hlvnuno','HLV','Nuno Espirito Santo', '2021-06-30', '2021-11-01', 'London, United Kingdom', '64767894', 'ctlv', 'TOT'),
 	('hlvcaan','HLV','Carlo Ancelotti', '2021-06-01',NULL, '15 Lombardy Lane, Madrid, Tây Ban Nha', '23456789','ctfp','rema'),
 	('hlvdisi','HLV','Diego Simeone', '2011-12-23',NULL, '10 Madrid Avenue, Madrid, Tây Ban Nha', '34567890',NULL,'atma'),
 	('hlvjk','HLV','Jürgen Klopp', '2015-10-08',NULL,'Liverpool, Anh','14611678','cttw','LIV'),
@@ -188,7 +185,7 @@ insert into NHANVIEN values
 	('roma9','Cầu thủ','Roger Martí', '2013-07-01',NULL, '20 Valencia Street, Valencia, Tây Ban Nha', '56789012',NULL,'vale'),
 	('edca7','Cầu thủ','Edinson Cavani', '2020-10-05',NULL, '10 Levante Boulevard, Valencia, Tây Ban Nha', '67890123',NULL,'vale'),
 	('rf10','Cầu thủ','Marcus Rashford', '2016-02-25', NULL, 'Manchester, United Kingdom', '52987653', 'hlvole', 'MUN'),
-   	('cr07','Cầu thủ','Cristiano Ronaldo', '2021-08-27', '2022-11-23', 'Manchester, United Kingdom', '06126456', 'hlvole', 'MUN'),
+    	('cr07','Cầu thủ','Cristiano Ronaldo', '2021-08-27', '2022-11-23', 'Manchester, United Kingdom', '06126456', 'hlvole', 'MUN'),
 	('vd04','Cầu thủ','Virgil van Dijk', '2017-12-27', NULL, 'Liverpool, United Kingdom', '69012376', 'hlvjk', 'LIV'),
 	('rf09','Cầu thủ','Roberto Firmino', '2015-07-06', NULL, 'Liverpool, United Kingdom', '20123456', 'hlvjk', 'LIV'),
 	('em31','Cầu thủ','Ederson Moraes', '2017-07-01', NULL, 'Manchester, United Kingdom', '52987654', 'hlvp', 'MCI'),
@@ -236,7 +233,7 @@ insert into CAUTHU values
 	('edca7', 7, 0),
 	('rf10',10,0),
 	('cr07',7,1),
-	('vd04',4,1),
+	('vd04',4,0),
 	('rf09',9,0),
 	('em31',31,0),
 	('pp47',47,0),
@@ -275,7 +272,13 @@ insert into SAN values
 	('THS','Tottenham Hotspur Stadium','London, Anh',62850,'TOT'),
 	('EMS','Emirates Stadium','London, Anh',60704,'ARS'),
 	('SB','Stamford Bridge','London, Anh',40341,'CHE');
-	
+
+insert into GIAIDAU values
+	('EPL2122','English Premier League','2021-08-13','2022-05-22','United Kingdom','MCI'),
+	('lfp1718', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha','barc'),
+	('lfp2122', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha','rema'),
+	('c12122', 'Champions League', '2021-06-22', '2022-05-29', 'Pháp','rema');
+
 insert into TRANDAU values
 	('lfp2122cano2410','2021-10-24 21:00', '1-2','barc','rema','cano','lfp2122'),
     	('lfp2122sabe2103','2022-03-21 22:00', '0-4', 'rema', 'barc', 'sabe','lfp2122'),
@@ -422,7 +425,7 @@ insert into THAMGIATRANDAU values
 	('304EPL2122','MCI','hlvp',-1,-1,-1,'HLV',0),		
 	('304EPL2122','LIV','hlvjk',-1,-1,-1,'HLV',0),
 	('304EPL2122','LIV','vd04',0,91,-1,'Trung vệ',0),	
-	('304EPL2122','LIV','rf09',68,91,59,'Tiền đạo cắm',0),		
+	('304EPL2122','LIV','rf09',68,91,79,'Tiền đạo cắm',0),		
 	('90EPL2122','LIV','vd04',0,90,-1,'Trung vệ',0),	
 	('90EPL2122','LIV','rf09',0,76,5,'Tiền đạo cắm',0),		
 	('90EPL2122','LIV','hlvjk',-1,-1,-1,'HLV',0),		
