@@ -9,7 +9,7 @@ begin
     declare GDAU varchar(10);
     declare TONG int;
     select MaCLB into CLB from CLB where TenCLB=TenCLB;
-    select MaGD into GDAU from GIAIDAU where year(NgBD)=NamBD;
+    select MaGD into GDAU from GIAIDAU where TenGD='La Liga' and year(NgBD)=NamBD;
     set TONG=0;
     select sum(case 
 		when left(TySo, 1)>right(TySo, 1) then 3
