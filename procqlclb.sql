@@ -14,7 +14,7 @@ begin
     declare mess varchar(50);
 	select MaCLB into CLBA from CLB where TenCLB=TenCLBA;
     select MaCLB into CLBB from CLB where TenCLB=TenCLBB;
-    select MaGD into GDAU from GIAIDAU where TenGD='' and year(NgBD)=NamBD;
+    select MaGD into GDAU from GIAIDAU where TenGD='La Liga' and year(NgBD)=NamBD;
     select TySo into TS1 from TRANDAU where CLB_A=CLBA and CLB_B=CLBB and MaGD=GDAU;
     select TySo into TS2 from TRANDAU where CLB_A=CLBB and CLB_B=CLBA and MaGD=GDAU;
     if left(TS1, 1) + right(TS2, 1)>right(TS1, 1) + left(TS2, 1) then
@@ -37,7 +37,7 @@ begin
 end$$
 DELIMITER ;
 -- Kiểm tra
-set @TenCLBA='Real Madrid', @TenCLBB='Barcelona', @TenGDAU='La Liga', @NamBD='2021';
-call PROC_HSDD(@TenCLBA, @TenCLBB, @TenGDAU, @NamBD);
+set @TenCLBA='Real Madrid', @TenCLBB='Barcelona', @NamBD='2021';
+call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
 -- Xóa
 drop procedure PROC_HSDD;
