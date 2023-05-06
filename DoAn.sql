@@ -275,8 +275,8 @@ insert into SAN values
 
 insert into GIAIDAU values
 	('EPL2122','English Premier League','2021-08-13','2022-05-22','United Kingdom','MCI'),
-	('lfp1718', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha','barc'),
-	('lfp2122', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha','rema'),
+	('lfp2122', 'La Liga', '2021-08-14', '2022-05-23', 'Tây Ban Nha','rema'),
+	('lfp1718', 'La Liga', '2017-08-19', '2018-05-21', 'Tây Ban Nha','barc'),
 	('c12122', 'Champions League', '2021-06-22', '2022-05-29', 'Pháp','rema');
 
 insert into TRANDAU values
