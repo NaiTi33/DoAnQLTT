@@ -11,27 +11,22 @@ begin
     declare GDAU varchar(10);
     declare TS1 varchar(3);
     declare TS2 varchar(3);
-    declare mess varchar(50);
 	select MaCLB into CLBA from CLB where TenCLB=TenCLBA;
     select MaCLB into CLBB from CLB where TenCLB=TenCLBB;
     select MaGD into GDAU from GIAIDAU where TenGD='La Liga' and year(NgBD)=NamBD;
     select TySo into TS1 from TRANDAU where CLB_A=CLBA and CLB_B=CLBB and MaGD=GDAU;
     select TySo into TS2 from TRANDAU where CLB_A=CLBB and CLB_B=CLBA and MaGD=GDAU;
     if left(TS1, 1) + right(TS2, 1)>right(TS1, 1) + left(TS2, 1) then
-		set mess=concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu');
-		signal sqlstate '45000' set message_text = mess;
+		select concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu') as 'Kết quả';
     elseif left(TS1, 1) + right(TS2, 1)<right(TS1, 1) + left(TS2, 1) then
-		set mess=concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu');
-		signal sqlstate '45000' set message_text = mess;
+		select concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu') as 'Kết quả';
     else 
 		if right(TS2, 1)>right(TS1, 1) then
-			set mess=concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu');
-			signal sqlstate '45000' set message_text = mess;
+			select concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu') as 'Kết quả';
         elseif right(TS2, 1)<right(TS1, 1) then
-			set mess=concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu');
-			signal sqlstate '45000' set message_text = mess;
+			select concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu') as 'Kết quả';
 		else
-			signal sqlstate '45000' set message_text = 'Cần phải xét các chỉ số fairplay hay trận đấu phụ để xác định được CLB';
+			select 'Cần phải xét các chỉ số fairplay hay trận đấu phụ để xác định được CLB' as 'Kết quả';
         end if;
     end if;
 end$$
@@ -41,3 +36,4 @@ set @TenCLBA='Real Madrid', @TenCLBB='Barcelona', @NamBD='2021';
 call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
 -- Xóa
 drop procedure PROC_HSDD;
+
