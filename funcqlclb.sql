@@ -72,5 +72,7 @@ CREATE FUNCTION danhgia (tenct varchar(30),mtd varchar(20))
 	end$$
 DELIMITER ;
 	
-
-
+-- Kiểm tra:
+SELECT danhgia('Pep Guardiola','02EPL2122') AS danhgia
+-- Xóa: 
+DROP FUNCTION danhgia
