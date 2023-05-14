@@ -1,5 +1,4 @@
--- Tạo thêm thuộc tính chỉ số lương vào nhân viên. Dựa vào thời gian trong hợp đồng, cập nhật chỉ số lương là 1.2 dối với nhân viên làm việc tính đến hiện tại là dưới 3 năm,
-1.8 là từ 3 đến 5 năm, 2.0 là trên 5 năm
+-- Tạo thêm thuộc tính chỉ số lương vào nhân viên. Dựa vào thời gian trong hợp đồng, cập nhật chỉ số lương là 1.2 dối với nhân viên làm việc tính đến hiện tại là dưới 3 năm,1.8 là từ 3 đến 5 năm, 2.0 là trên 5 năm
 DELIMITER $$
 ALTER TABLE dbo.NHANVIEN ADD chisoluong FLOAT ;
 DECLARE cur CURSOR FOR SELECT NgBD,NgKT,MaNV FROM dbo.HOPDONG ;
