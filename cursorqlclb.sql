@@ -1,13 +1,14 @@
 -- Tạo thêm thuộc tính chỉ số lương vào nhân viên. Dựa vào thời gian trong hợp đồng, cập nhật chỉ số lương là 1.2 dối với nhân viên làm việc tính đến hiện tại là dưới 3 năm,1.8 là từ 3 đến 5 năm, 2.0 là trên 5 năm
 DELIMITER $$
+BEGIN
 DECLARE finished INTEGER DEFAULT 0;
 ALTER TABLE NHANVIEN ADD chisoluong FLOAT ;
 DECLARE CONTINUE HANDLER 
 FOR NOT FOUND SET finished = 1;
 DECLARE cur CURSOR FOR SELECT NgBD,NgKT,MaNV FROM dbo.HOPDONG ;
-DECLARE ngbd DATE;
-DECLARE ngkt DATE;
-DECLARE mnv VARCHAR(10);
+DECLARE ngbd DATE DEFAULT "";
+DECLARE ngkt DATE DEFAULT "";
+DECLARE mnv VARCHAR(10) DEFAULT "";
 OPEN cur;
 cur: LOOP
 FETCH cur INTO ngbd,ngkt,mnv;
