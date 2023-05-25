@@ -1,4 +1,3 @@
-
 select * from mysql.user;
 
 FLUSH PRIVILEGES;
@@ -35,10 +34,6 @@ GRANT INSERT, DELETE, UPDATE ON qlclb.DANHHIEU TO 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.TRANDAU TO 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.CTDH TO 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.CLB TO 'fifa';
-CREATE USER 'chutichfifa'@'localhost' IDENTIFIED BY '123456';
-GRANT 'fifa'@'%' TO 'chutichfifa'@'localhost';
-SET DEFAULT ROLE 'fifa'@'%' TO
-  'chutichfifa'@'localhost';
 FLUSH PRIVILEGES;
 
 CREATE ROLE clb;
@@ -49,10 +44,6 @@ GRANT INSERT, DELETE, UPDATE ON qlclb.NHANVIEN TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.SAN TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.CAUTHU TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.HLV TO clb;
-CREATE USER 'clb01'@'localhost' IDENTIFIED BY '123456';
-GRANT 'clb'@'%' TO 'clb01'@'localhost';
-SET DEFAULT ROLE 'clb'@'%' TO
-  'clb01'@'localhost';
 FLUSH PRIVILEGES;
 
 
@@ -60,25 +51,16 @@ create role hlv;
 GRANT SELECT ON qlclb.THAMGIATRANDAU TO 'hlv';
 GRANT SELECT ON qlclb.CAUTHU TO 'hlv';
 GRANT INSERT, DELETE, UPDATE ON qlclb.THAMGIATRANDAU TO hlv;
-CREATE USER 'hlv01'@'localhost' IDENTIFIED BY '123456';
-drop user 'hlv01'@'localhost';
-GRANT 'hlv'@'%' TO 'hlv01'@'localhost';
-SET DEFAULT ROLE 'hlv'@'%' TO
-  'hlv01'@'localhost';
 FLUSH PRIVILEGES;
 
 create role cauthu;
 use qlclb;
 GRANT select ON qlclb.THAMGIATRANDAU TO cauthu;
 grant execute on procedure SP_DHRaSan to cauthu;
-CREATE USER 'ct01'@'localhost' IDENTIFIED BY '123456';
-GRANT 'cauthu'@'%' TO 'ct01'@'localhost';
-SET DEFAULT ROLE 'cauthu'@'%' TO
-  'ct01'@'localhost';
 FLUSH PRIVILEGES;
 
 
-SELECT CURRENT_ROLE();
+
 
 
 DELIMITER $$
@@ -146,11 +128,39 @@ BEGIN
     
 END;
 
-call SP_createuser ('ct03','123456','sai')
-drop user ct03@'localhost'
+
+call SP_createuser ('lm10','123456','cauthu');
+call SP_createuser ('ctlv','123456','clb');
+call SP_createuser ('ctfifa','123456','fifa');
+call SP_createuser ('hlvcaan','123456','hlv');
+
 drop procedure SP_createuser
 
 
+DELIMITER $$
+CREATE PROCEDURE SP_deleteuser (
+	IN p_username VARCHAR(30),
+    IN p_role VARCHAR(30)
+)
+BEGIN
+	DECLARE v_host VARCHAR(100);
+    SET v_host = 'localhost';
 
+	SET @revoke_query = CONCAT('REVOKE ', p_role, ' FROM ''', p_username, '''@''', v_host, '''');
+	PREPARE revoke_stmt FROM @revoke_query;
+	EXECUTE revoke_stmt;
+	DEALLOCATE PREPARE revoke_stmt;
+    
+	SET @drop_user_query = CONCAT('DROP USER ''', p_username, '''@''', v_host, '''');
+	PREPARE drop_user_stmt FROM @drop_user_query;
+	EXECUTE drop_user_stmt;
+	DEALLOCATE PREPARE drop_user_stmt;
+    
+END;
 
-
+call SP_deleteuser ('lm10','cauthu');
+call SP_deleteuser ('ctlv','clb');
+call SP_deleteuser ('ctfifa','fifa');
+call SP_deleteuser ('hlvcaan','hlv');
+select * from mysql.user;
+drop procedure SP_deleteuser
