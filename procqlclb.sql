@@ -131,9 +131,9 @@ BEGIN
 		SELECT  CONCAT('CLB ', TCLB, ' không tồn tại') AS 'ERROR';
 	end if;
 END$$
-DELIMITER;
+DELIMITER ;
 -- Kiểm tra
-call SP_TonggiatriHD ('Manchester City', @total)
+call SP_TonggiatriHD ('Manchester City', @total);
 SELECT @total as Tong_Gia_Tri_Hop_Dong;
 -- xoá 
 drop PROCEDURE SP_TonggiatriHD
