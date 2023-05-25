@@ -55,11 +55,11 @@ CREATE FUNCTION danhgia (tenct varchar(30),mtd varchar(20))
 	DECLARE ghiban INT;
 	DECLARE tgiantrandau INT;
 	DECLARE tgianthidau INT;
-	SELECT mct=NHANVIEN.MaNV FROM dbo.NHANVIEN,dbo.CAUTHU WHERE CAUTHU.MaNV=NHANVIEN.MaNV AND Ten=tenct ;
-	SELECT tgiantrandau=MAX(PhutTraSan),tgianthidau=(PhutTraSan-PhutVaoSan) 
-	FROM dbo.THAMGIATRANDAU 
+	SELECT NHANVIEN.MaNV into mct FROM NHANVIEN,CAUTHU WHERE CAUTHU.MaNV=NHANVIEN.MaNV AND Ten=tenct ;
+	SELECT MAX(PhutTraSan) into tgiantrandau,(PhutTraSan-PhutVaoSan) into tgianthidau
+	FROM THAMGIATRANDAU 
 	WHERE mct=MaNV AND MaTD=mtd GROUP BY PhutTraSan,PhutVaoSan;
-	SELECT ghiban=COUNT(*) FROM dbo.THAMGIATRANDAU  
+	SELECT COUNT(*) into ghiban FROM THAMGIATRANDAU  
 	WHERE mct=MaNV AND MaTD=mtd AND PhutGhiBan >-1;
 	IF ghiban > 1 AND tgiantrandau=tgianthidau AND mct != NULL THEN
 	SET @danhgia='S';
