@@ -29,15 +29,19 @@ drop function FUNC_TONGDIEM;
 -- Function tính ngày hết hạn hợp đồng của nhân viên: 
 DELIMITER $$
 CREATE FUNCTION FUNC_hethopdong (tennv varchar(30)) 
-RETURNS TABLE
-	RETURN SELECT dbo.HOPDONG.MaNV,Ten,MaCLB,VaiTro,TIMESTAMPDIFF(DAY,NOW(),NgKT) AS nghethan 
-	FROM dbo.HOPDONG,dbo.NHANVIEN
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE NGHH INT;
+    SELECT TIMESTAMPDIFF(DAY, NOW(), NgKT) INTO NGHH
+    FROM HOPDONG, NHANVIEN
 	WHERE NHANVIEN.Ten=tennv AND HOPDONG.MaNV=NHANVIEN.MaNV;
-end$$
+    RETURN NGHH;
+END$$
 DELIMITER ;
 -- kiểm tra
 set @tennv ='alisson';
-select FUNC_hethopdong(@tennv) as 'Thông tin hợp đồng';
+select FUNC_hethopdong(@tennv) as 'Số ngày còn lại trong hợp đồng';
 -- Xóa
 drop function FUNC_hethopdong;
 
