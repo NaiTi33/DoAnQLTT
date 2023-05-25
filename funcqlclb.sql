@@ -49,34 +49,33 @@ drop function FUNC_hethopdong;
 DELIMITER $$
 CREATE FUNCTION danhgia (tenct varchar(30),mtd varchar(20)) 
 	RETURNS VARCHAR(20)
-	begin
+    DETERMINISTIC
+begin
 	DECLARE mct VARCHAR(10);
 	DECLARE danhgia VARCHAR(20);
 	DECLARE ghiban INT;
 	DECLARE tgiantrandau INT;
 	DECLARE tgianthidau INT;
 	SELECT NHANVIEN.MaNV into mct FROM NHANVIEN,CAUTHU WHERE CAUTHU.MaNV=NHANVIEN.MaNV AND Ten=tenct ;
-	SELECT MAX(PhutTraSan) into tgiantrandau,(PhutTraSan-PhutVaoSan) into tgianthidau
+	SELECT MAX(PhutTraSan), (PhutTraSan-PhutVaoSan) into tgiantrandau, tgianthidau
 	FROM THAMGIATRANDAU 
 	WHERE mct=MaNV AND MaTD=mtd GROUP BY PhutTraSan,PhutVaoSan;
 	SELECT COUNT(*) into ghiban FROM THAMGIATRANDAU  
 	WHERE mct=MaNV AND MaTD=mtd AND PhutGhiBan >-1;
 	IF ghiban > 1 AND tgiantrandau=tgianthidau AND mct != NULL THEN
-	SET @danhgia='S';
-	ELSE
-	IF ghiban= 1 OR  tgiantrandau=tgianthidau AND mct != NULL THEN
-	SET @danhgia='A';
-	ELSE 
-	IF (ghiban <1 OR  tgiantrandau>tgianthidau) AND mct != NULL THEN
-	SET danhgia='B';
-	ELSE SET danhgia ='nhap sai!';
-	end if;
-   	end if;
+		SET danhgia='S';
+	ELSEIF ghiban= 1 OR  tgiantrandau=tgianthidau AND mct != NULL THEN
+		SET danhgia='A';
+	ELSEIF (ghiban <1 OR  tgiantrandau>tgianthidau) AND mct != NULL THEN
+		SET danhgia='B';
+	ELSE SET danhgia ='nhập sai!';
+	END IF;
 	RETURN danhgia;
-	end$$
+end$$
 DELIMITER ;
 	
 -- Kiểm tra:
-SELECT danhgia('Pep Guardiola','02EPL2122') AS danhgia
+SELECT danhgia('Pep Guardiola','02EPL2122') AS 'đánh giá'; -- Nhap sai
+SELECT danhgia('Heung-Min Son','02EPL2122') AS 'đánh giá'; -- A
 -- Xóa: 
-DROP FUNCTION danhgia
+DROP FUNCTION danhgia;
