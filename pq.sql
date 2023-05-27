@@ -1,3 +1,4 @@
+
 select * from mysql.user;
 
 FLUSH PRIVILEGES;
@@ -16,11 +17,6 @@ drop role hlv;
 drop role cauthu;
 
 
--- xoá user 
-DROP USER 'chutichfifa'@'localhost' ;
-drop user 'clb01'@'localhost';
-drop user 'ct01'@'localhost';
-drop user 'hlv01'@'localhost';
 
 
 
@@ -29,6 +25,7 @@ CREATE ROLE fifa;
 GRANT SELECT ON qlclb.* TO 'fifa';
 grant execute on procedure PROC_HSDD to 'fifa';
 grant execute on procedure SP_TonggiatriHD to 'fifa';
+grant execute on function FUNC_TONGDIEM to 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.GIAIDAU TO 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.DANHHIEU TO 'fifa';
 GRANT INSERT, DELETE, UPDATE ON qlclb.TRANDAU TO 'fifa';
@@ -39,6 +36,8 @@ FLUSH PRIVILEGES;
 CREATE ROLE clb;
 GRANT SELECT ON qlclb.* TO 'clb';
 grant execute on procedure SP_DH_DatDuoc to 'clb';
+grant execute on function FUNC_hethopdong to 'clb';
+grant execute on procedure createcurList to 'clb';
 GRANT INSERT, DELETE, UPDATE ON qlclb.HOPDONG TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.NHANVIEN TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.SAN TO clb;
@@ -51,6 +50,7 @@ create role hlv;
 GRANT SELECT ON qlclb.THAMGIATRANDAU TO 'hlv';
 GRANT SELECT ON qlclb.CAUTHU TO 'hlv';
 GRANT INSERT, DELETE, UPDATE ON qlclb.THAMGIATRANDAU TO hlv;
+grant execute on function danhgia to 'hlv';
 FLUSH PRIVILEGES;
 
 create role cauthu;
@@ -162,5 +162,5 @@ call SP_deleteuser ('lm10','cauthu');
 call SP_deleteuser ('ctlv','clb');
 call SP_deleteuser ('ctfifa','fifa');
 call SP_deleteuser ('hlvcaan','hlv');
-select * from mysql.user;
+
 drop procedure SP_deleteuser
