@@ -32,15 +32,20 @@ begin
 end$$
 DELIMITER ;
 -- Kiểm tra
+-- --Khác hiệu số
 set @TenCLBA='Real Madrid', @TenCLBB='Barcelona', @NamBD='2021';
 call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
--- Xóa
-drop procedure PROC_HSDD;
+-- --Bằng hiệu số
+insert into TRANDAU values ('lfp1718atma1010', '2017-10-10 18:00', '3-0', 'atma', 'reso', 'wame', 'lfp1718');
+set @TenCLBA='Atlético Madrid', @TenCLBB='Real Sociedad', @NamBD='2017';
+call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
+-- xóa
+delete from TRANDAU where MaTD = 'lfp1718atma1010'
 
 
--- 1.Store Procedure đưa vào tên giải đấu, Mã clb A, Mã CLB B, Ngày thi đấu, cho ra đội hình ra sân của 2 đội 
+-- Store Procedure đưa vào tên giải đấu, Mã clb A, Mã CLB B, Ngày thi đấu, cho ra đội hình ra sân của 2 đội 
 DELIMITER $$
-CREATE  PROCEDURE SP_DHRaSan(
+CREATE PROCEDURE SP_DHRaSan(
     IN TGD varchar(30),
     IN CLBA varchar(10),
     IN CLBB varchar(10),
@@ -49,8 +54,8 @@ CREATE  PROCEDURE SP_DHRaSan(
 BEGIN
     DECLARE MGD varchar(10);
     DECLARE MTD varchar(20);
-
-		SELECT MaGD INTO MGD
+	DECLARE error_message varchar(255);
+	SELECT MaGD INTO MGD
     FROM GIAIDAU
     WHERE TenGD = TGD AND year(NgBD) <= year(NgayThiDau) and year(NgKT) >= year(NgayThiDau);
 		
@@ -59,9 +64,11 @@ BEGIN
     WHERE CLB_A = CLBA AND CLB_B = CLBB AND MaGD = MGD AND date(TGThiDau)=NgayThiDau;
 		
 		if MGD is NULL then 
-			SELECT  CONCAT('Giải đấu ', TGD, ' không tồn tại') AS 'ERROR';
+			set error_message = CONCAT('Giải đấu ', TGD, ' không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		ELSEIF MTD is NULL then
-			SELECT  CONCAT('Trận đấu không tồn tại') AS 'ERROR';
+			set error_message = CONCAT('Trận đấu không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		else 
 			
 		SELECT NHANVIEN.Ten, CAUTHU.SoAo, THAMGIATRANDAU.ChucVu
@@ -84,18 +91,21 @@ call  SP_DHRaSan ('English Premier League','ARS','CHE','2021-08-22'); -- thành 
 call  SP_DHRaSan ('English ','ARS','CHE','2021-08-22'); -- giải đấu không tồn tại
 call  SP_DHRaSan ('English Premier League','A','CHE','2021-08-22'); -- trận đấu không tồn tại
 
--- 2.Store Procedure đưa vào tên CLB, tên giải đấu, năm, cho ra các danh hiệu đạt được
+-- Store Procedure đưa vào tên CLB, tên giải đấu, năm, cho ra các danh hiệu đạt được
 DELIMITER $$
 CREATE PROCEDURE SP_DH_DatDuoc(IN ten_clb VARCHAR(30), IN ten_gd VARCHAR(30), in nambd int)
 BEGIN
 		declare ma_gd varchar(10);
+        declare error_message varchar(255);
 		select GD.MaGD into ma_gd
 		from GIAIDAU GD
 		where GD.TenGD=ten_gd and year(NgBD)=nambd;
 		if ma_gd is null THEN
-			SELECT  CONCAT('Giải đấu ', ten_gd, ' không tồn tại') AS 'ERROR';
+			set error_message = CONCAT('Giải đấu ', ten_gd, ' không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		ELSEIF not exists (select * from CLB where TenCLB=ten_clb) then
-			SELECT  CONCAT('CLB ', ten_clb, ' không tồn tại') AS 'ERROR';
+			set error_message = CONCAT('CLB ', ten_clb, ' không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		else 
     SELECT DISTINCT(DH.TenDH) As 'Danh hiệu đạt được'
     FROM DANHHIEU DH
@@ -111,35 +121,24 @@ CALL SP_DH_DatDuoc('Manchester City','English Premier League',2021); -- Thành c
 CALL SP_DH_DatDuoc('MC','English Premier League',2021); -- CLB ko tồn tại
 CALL SP_DH_DatDuoc('Manchester City','EPL',2021); -- GIAIDAU ko tồn tại
 
-select * from GIAIDAU
-select * from CTDH
-select * from GIAI
 
-drop PROCEDURE SP_DH_DatDuoc
-
--- 3.Store Procedure đưa vào tên CLB,cho ra tổng trị giá đội hình
+-- Store Procedure đưa vào tên CLB,cho ra tổng trị giá đội hình
 DELIMITER $$
 CREATE PROCEDURE SP_TonggiatriHD(IN TCLB varchar(30), OUT total FLOAT)
 BEGIN
 	declare countCLB int;
+    declare error_message varchar(255);
 	set countCLB=(select count(*) from CLB where TenCLB=TCLB);
 	if countCLB > 0 THEN
 		select SUM(GiaTri) into total 
 		from HOPDONG,CLB 
 		where TCLB=TenCLB AND CLB.MaCLB=HOPDONG.MaCLB;
 	else 
-		SELECT  CONCAT('CLB ', TCLB, ' không tồn tại') AS 'ERROR';
+		set error_message = CONCAT('CLB ', TCLB, ' không tồn tại');
+		signal sqlstate '45000' set message_text = error_message;
 	end if;
 END$$
 DELIMITER ;
 -- Kiểm tra
 call SP_TonggiatriHD ('Manchester City', @total);
 SELECT @total as Tong_Gia_Tri_Hop_Dong;
--- xoá 
-drop PROCEDURE SP_TonggiatriHD
-
-
-
-
-
-
