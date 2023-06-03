@@ -1,13 +1,9 @@
 
 select * from mysql.user;
 
-FLUSH PRIVILEGES;
-use qlclb;
 
-SELECT * FROM mysql.role_edges;
-
-SHOW GRANTS FOR 'ct02'@'localhost';
-SHOW GRANTS FOR 'fifa';
+SHOW GRANTS FOR ;
+SHOW GRANTS FOR ;
 FLUSH PRIVILEGES;
 
 -- xoá role 
@@ -17,20 +13,16 @@ drop role hlv;
 drop role cauthu;
 
 
-
-
-
-
-CREATE ROLE fifa;
-GRANT SELECT ON qlclb.* TO 'fifa';
-grant execute on procedure PROC_HSDD to 'fifa';
-grant execute on procedure SP_TonggiatriHD to 'fifa';
-grant execute on function FUNC_TONGDIEM to 'fifa';
-GRANT INSERT, DELETE, UPDATE ON qlclb.GIAIDAU TO 'fifa';
-GRANT INSERT, DELETE, UPDATE ON qlclb.DANHHIEU TO 'fifa';
-GRANT INSERT, DELETE, UPDATE ON qlclb.TRANDAU TO 'fifa';
-GRANT INSERT, DELETE, UPDATE ON qlclb.CTDH TO 'fifa';
-GRANT INSERT, DELETE, UPDATE ON qlclb.CLB TO 'fifa';
+CREATE ROLE LienDoan;
+GRANT SELECT ON qlclb.* TO 'LienDoan';
+grant execute on procedure PROC_HSDD to 'LienDoan';
+grant execute on procedure SP_TonggiatriHD to 'LienDoan';
+grant execute on function FUNC_TONGDIEM to 'LienDoan';
+GRANT INSERT, DELETE, UPDATE ON qlclb.GIAIDAU TO 'LienDoan';
+GRANT INSERT, DELETE, UPDATE ON qlclb.DANHHIEU TO 'LienDoan';
+GRANT INSERT, DELETE, UPDATE ON qlclb.TRANDAU TO 'LienDoan';
+GRANT INSERT, DELETE, UPDATE ON qlclb.CTDH TO 'LienDoan';
+GRANT INSERT, DELETE, UPDATE ON qlclb.CLB TO 'LienDoan';
 FLUSH PRIVILEGES;
 
 CREATE ROLE clb;
@@ -78,60 +70,22 @@ BEGIN
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 
-    IF p_role = 'fifa' THEN
-        SET @sql = CONCAT('GRANT fifa TO ''', p_username, '''@''', v_host, ''';');
-        PREPARE stmt FROM @sql;
-        EXECUTE stmt;
-        DEALLOCATE PREPARE stmt;
+	SET @sql = CONCAT('GRANT ', p_role, ' TO ''', p_username, '''@''', v_host, ''';');
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
         
-        SET @default_role_query = CONCAT('SET DEFAULT ROLE fifa@''%'' TO ''', p_username, '''@''', v_host, '''');
-        PREPARE default_role_stmt FROM @default_role_query;
-        EXECUTE default_role_stmt;
-        DEALLOCATE PREPARE default_role_stmt;
-        
-    ELSEIF p_role = 'clb' THEN
-        SET @sql = CONCAT('GRANT clb TO ''', p_username, '''@''', v_host, ''';');
-        PREPARE stmt FROM @sql;
-        EXECUTE stmt;
-        DEALLOCATE PREPARE stmt;
-        
-        SET @default_role_query = CONCAT('SET DEFAULT ROLE clb@''%'' TO ''', p_username, '''@''', v_host, '''');
-        PREPARE default_role_stmt FROM @default_role_query;
-        EXECUTE default_role_stmt;
-        DEALLOCATE PREPARE default_role_stmt;
-        
-    ELSEIF p_role = 'hlv' THEN
-        SET @sql = CONCAT('GRANT hlv TO ''', p_username, '''@''', v_host, ''';');
-        PREPARE stmt FROM @sql;
-        EXECUTE stmt;
-        DEALLOCATE PREPARE stmt;
-        
-        SET @default_role_query = CONCAT('SET DEFAULT ROLE hlv@''%'' TO ''', p_username, '''@''', v_host, '''');
-        PREPARE default_role_stmt FROM @default_role_query;
-        EXECUTE default_role_stmt;
-        DEALLOCATE PREPARE default_role_stmt;
-        
-	ELSEIF p_role = 'cauthu' THEN
-        SET @sql = CONCAT('GRANT cauthu TO ''', p_username, '''@''', v_host, ''';');
-        PREPARE stmt FROM @sql;
-        EXECUTE stmt;
-        DEALLOCATE PREPARE stmt;
-        
-        SET @default_role_query = CONCAT('SET DEFAULT ROLE cauthu@''%'' TO ''', p_username, '''@''', v_host, '''');
-        PREPARE default_role_stmt FROM @default_role_query;
-        EXECUTE default_role_stmt;
-        DEALLOCATE PREPARE default_role_stmt;
-	
-	ELSE
-        SELECT 'Invalid role';
-    END IF;
+	SET @default_role_query = CONCAT('SET DEFAULT ROLE ', p_role, '@''%'' TO ''', p_username, '''@''', v_host, '''');
+	PREPARE default_role_stmt FROM @default_role_query;
+	EXECUTE default_role_stmt;
+	DEALLOCATE PREPARE default_role_stmt;
     
 END;
 
 
 call SP_createuser ('lm10','123456','cauthu');
 call SP_createuser ('ctlv','123456','clb');
-call SP_createuser ('ctfifa','123456','fifa');
+call SP_createuser ('ctfifa','123456','LienDoan');
 call SP_createuser ('hlvcaan','123456','hlv');
 
 drop procedure SP_createuser
@@ -160,7 +114,7 @@ END;
 
 call SP_deleteuser ('lm10','cauthu');
 call SP_deleteuser ('ctlv','clb');
-call SP_deleteuser ('ctfifa','fifa');
+call SP_deleteuser ('ctfifa','LienDoan');
 call SP_deleteuser ('hlvcaan','hlv');
 
 drop procedure SP_deleteuser
