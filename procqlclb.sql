@@ -9,21 +9,25 @@ begin
 	declare CLBA varchar(10);
     declare CLBB varchar(10);
     declare GDAU varchar(10);
-    declare TS1 varchar(3);
-    declare TS2 varchar(3);
+    declare TS_A1 varchar(3);
+    declare TS_B1  varchar(3);
+    declare TS_A2 varchar(3);
+    declare TS_B2  varchar(3);
 	select MaCLB into CLBA from CLB where TenCLB=TenCLBA;
     select MaCLB into CLBB from CLB where TenCLB=TenCLBB;
     select MaGD into GDAU from GIAIDAU where TenGD='La Liga' and year(NgBD)=NamBD;
-    select TySo into TS1 from TRANDAU where CLB_A=CLBA and CLB_B=CLBB and MaGD=GDAU;
-    select TySo into TS2 from TRANDAU where CLB_A=CLBB and CLB_B=CLBA and MaGD=GDAU;
-    if left(TS1, 1) + right(TS2, 1)>right(TS1, 1) + left(TS2, 1) then
+    select TySo_A, TySo_B into TS_A1, TS_B1 
+    from TRANDAU where CLB_A=CLBA and CLB_B=CLBB and MaGD=GDAU;
+    select TySo_A, TySo_B into TS_B2, TS_A2 
+    from TRANDAU where CLB_A=CLBB and CLB_B=CLBA and MaGD=GDAU;
+    if TS_A1 + TS_A2 > TS_B1 + TS_B2 then
 		select concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu') as 'Kết quả';
-    elseif left(TS1, 1) + right(TS2, 1)<right(TS1, 1) + left(TS2, 1) then
+    elseif TS_A1 + TS_A2 < TS_B1 + TS_B2 then
 		select concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu') as 'Kết quả';
     else 
-		if right(TS2, 1)>right(TS1, 1) then
+		if TS_A2 > TS_B1 then
 			select concat('CLB ', TenCLBA, ' hơn về hiệu số đối đầu') as 'Kết quả';
-        elseif right(TS2, 1)<right(TS1, 1) then
+        elseif TS_A2 < TS_B1 then
 			select concat('CLB ', TenCLBB, ' hơn về hiệu số đối đầu') as 'Kết quả';
 		else
 			select 'Cần phải xét các chỉ số fairplay hay trận đấu phụ để xác định được CLB' as 'Kết quả';
@@ -39,7 +43,7 @@ call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
 insert into TRANDAU values ('lfp1718atma1010', '2017-10-10 18:00', '3-0', 'atma', 'reso', 'wame', 'lfp1718');
 set @TenCLBA='Atlético Madrid', @TenCLBB='Real Sociedad', @NamBD='2017';
 call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
--- xóa
+-- khôi phục dữ liệu
 delete from TRANDAU where MaTD = 'lfp1718atma1010'
 
 
