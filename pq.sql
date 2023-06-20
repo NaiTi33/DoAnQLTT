@@ -23,7 +23,6 @@ FLUSH PRIVILEGES;
 CREATE ROLE clb;
 GRANT SELECT ON qlclb.* TO 'clb';
 grant execute on procedure SP_DH_DatDuoc to 'clb';
-grant execute on function FUNC_hethopdong to 'clb';
 grant execute on procedure createcurList to 'clb';
 GRANT INSERT, DELETE, UPDATE ON qlclb.HOPDONG TO clb;
 GRANT INSERT, DELETE, UPDATE ON qlclb.NHANVIEN TO clb;
@@ -84,7 +83,7 @@ BEGIN
     
 END;
 
--- Thực thi
+
 call SP_createuser ('lm10','123456','cauthu');
 call SP_createuser ('ctlv','123456','clb');
 call SP_createuser ('ctfifa','123456','LienDoan');
