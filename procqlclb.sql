@@ -47,18 +47,21 @@ call PROC_HSDD(@TenCLBA, @TenCLBB, @NamBD);
 delete from TRANDAU where MaTD = 'lfp1718atma1010'
 
 
--- Store Procedure đưa vào tên giải đấu, Mã clb A, Mã CLB B, Ngày thi đấu, cho ra đội hình ra sân của 2 đội 
+-- Store Procedure đưa vào tên giải đấu, tên clb A, tên CLB B, Ngày thi đấu, cho ra đội hình ra sân của 2 đội 
 DELIMITER $$
-CREATE PROCEDURE SP_DHRaSan(
+CREATE  PROCEDURE SP_DHRaSan(
     IN TGD varchar(30),
-    IN CLBA varchar(10),
-    IN CLBB varchar(10),
+    IN TCLBA varchar(30),
+    IN TCLBB varchar(30),
     IN NgayThiDau datetime
 )
 BEGIN
     DECLARE MGD varchar(10);
     DECLARE MTD varchar(20);
-	DECLARE error_message varchar(255);
+	declare CLBA varchar(10);
+    declare CLBB varchar(10);
+    select MaCLB into CLBA from CLB where TenCLB=TCLBA;
+    select MaCLB into CLBB from CLB where TenCLB=TCLBB;
 	SELECT MaGD INTO MGD
     FROM GIAIDAU
     WHERE TenGD = TGD AND year(NgBD) <= year(NgayThiDau) and year(NgKT) >= year(NgayThiDau);
@@ -68,25 +71,23 @@ BEGIN
     WHERE CLB_A = CLBA AND CLB_B = CLBB AND MaGD = MGD AND date(TGThiDau)=NgayThiDau;
 		
 		if MGD is NULL then 
-			set error_message = CONCAT('Giải đấu ', TGD, ' không tồn tại');
-			signal sqlstate '45000' set message_text = error_message;
+			SELECT  CONCAT('Giải đấu ', TGD, ' không tồn tại') AS 'ERROR';
 		ELSEIF MTD is NULL then
-			set error_message = CONCAT('Trận đấu không tồn tại');
-			signal sqlstate '45000' set message_text = error_message;
+			SELECT  CONCAT('Trận đấu không tồn tại') AS 'ERROR';
 		else 
 			
-		SELECT NHANVIEN.Ten, CAUTHU.SoAo, THAMGIATRANDAU.ChucVu
+	SELECT NHANVIEN.Ten 'Tên', CAUTHU.SoAo as 'Số áo', THAMGIATRANDAU.ChucVu as 'Vị trí'
     FROM NHANVIEN
     INNER JOIN CAUTHU ON NHANVIEN.MaNV = CAUTHU.MaNV
     INNER JOIN THAMGIATRANDAU ON NHANVIEN.MaNV = THAMGIATRANDAU.MaNV
     WHERE THAMGIATRANDAU.MaTD = MTD AND THAMGIATRANDAU.PhutVaoSan = 0 AND THAMGIATRANDAU.MaCLB = CLBA ;
 
-    SELECT NHANVIEN.Ten, CAUTHU.SoAo, THAMGIATRANDAU.ChucVu 
+    SELECT NHANVIEN.Ten 'Tên', CAUTHU.SoAo as 'Số áo', THAMGIATRANDAU.ChucVu as 'Vị trí'
     FROM NHANVIEN
     INNER JOIN CAUTHU ON NHANVIEN.MaNV = CAUTHU.MaNV
     INNER JOIN THAMGIATRANDAU ON NHANVIEN.MaNV = THAMGIATRANDAU.MaNV
     WHERE THAMGIATRANDAU.MaTD = MTD AND THAMGIATRANDAU.PhutVaoSan = 0 AND THAMGIATRANDAU.MaCLB = CLBB ;
-		end if;
+	end if;
 END$$
 DELIMITER ;
 
