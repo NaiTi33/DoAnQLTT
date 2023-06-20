@@ -3,7 +3,7 @@ use qlclb;
 --  Thực thi
 
 insert into NHANVIEN values
-	('011111','Chủ tịch','Richard Arnold', '2022-01-06', NULL, 'Manchester, United Kingdom', '46168989', NULL, 'MUN'); -- Thành công 
+	('011111','Richard Arnold', '2022-01-06', NULL, 'Manchester, United Kingdom', '46168989', NULL, 'MUN'); -- Thành công 
 
 
 insert into GIAIDAU values
@@ -14,9 +14,6 @@ CALL SP_DH_DatDuoc('Manchester City','English Premier League',2021); -- Thành c
 CALL SP_DH_DatDuoc('MC','English Premier League',2021); -- CLB ko tồn tại
 CALL SP_DH_DatDuoc('Manchester City','EPL',2021); -- GIAIDAU ko tồn tại
 
-
-set @tennv ='alisson';
-select FUNC_hethopdong(@tennv) as 'Số ngày còn lại trong hợp đồng';
 
 -- Kiểm tra
 select * from NHANVIEN;
