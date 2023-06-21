@@ -421,7 +421,7 @@ insert into THAMGIATRANDAU values
 	('bkc12122AF2804','LIV','hlvjk', -1, -1,-1,'HLV',0),
 	('bkc12122AF2804','LIV','ms11', 0, 95,-1,'Tiền đạo phải',0),
 	('bkc12122AF2804','LIV','al1', 0, 95,-1,'Thủ môn',1),
-	('304EPL2122','MCI','em31',0,91,69,'Thủ môn',0),		
+	('304EPL2122','MCI','em31',0,91,-1,'Thủ môn',0),		
 	('304EPL2122','MCI','pp47',0,91,69,'Tiền đạo cánh trái',0),
 	('304EPL2122','MCI','hlvp',-1,-1,-1,'HLV',0),		
 	('304EPL2122','LIV','hlvjk',-1,-1,-1,'HLV',0),
