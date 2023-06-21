@@ -1,0 +1,5 @@
+backup:
+mysqldump -u root -p qlclb > qlclbbk.sql
+restore:
+mysql -u root -p -e "qlclbrs";
+mysql -u root -p qlclbrs < qlclbbk.sql
