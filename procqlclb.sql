@@ -60,6 +60,7 @@ BEGIN
     DECLARE MTD varchar(20);
 	declare CLBA varchar(10);
     declare CLBB varchar(10);
+    declare error_message varchar(255);
     select MaCLB into CLBA from CLB where TenCLB=TCLBA;
     select MaCLB into CLBB from CLB where TenCLB=TCLBB;
 	SELECT MaGD INTO MGD
@@ -71,9 +72,11 @@ BEGIN
     WHERE CLB_A = CLBA AND CLB_B = CLBB AND MaGD = MGD AND date(TGThiDau)=NgayThiDau;
 		
 		if MGD is NULL then 
-			SELECT  CONCAT('Giải đấu ', TGD, ' không tồn tại') AS 'ERROR';
+			set error_message = CONCAT('Giải đấu ', TGD, ' không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		ELSEIF MTD is NULL then
-			SELECT  CONCAT('Trận đấu không tồn tại') AS 'ERROR';
+            set error_message = CONCAT('Trận đấu không tồn tại');
+			signal sqlstate '45000' set message_text = error_message;
 		else 
 			
 	SELECT NHANVIEN.Ten 'Tên', CAUTHU.SoAo as 'Số áo', THAMGIATRANDAU.ChucVu as 'Vị trí'
@@ -92,9 +95,9 @@ END$$
 DELIMITER ;
 
 -- Kiểm tra
-call  SP_DHRaSan ('English Premier League','ARS','CHE','2021-08-22'); -- thành công
-call  SP_DHRaSan ('English ','ARS','CHE','2021-08-22'); -- giải đấu không tồn tại
-call  SP_DHRaSan ('English Premier League','A','CHE','2021-08-22'); -- trận đấu không tồn tại
+call  SP_DHRaSan ('English Premier League','Arsenal','Chelsea','2021-08-22'); -- thành công
+call  SP_DHRaSan ('English ','Arsenal','Chelsea','2021-08-22'); -- giải đấu không tồn tại
+call  SP_DHRaSan ('English Premier League','Ars','Chelsea','2021-08-22'); -- trận đấu không tồn tại
 
 -- Store Procedure đưa vào tên CLB, tên giải đấu, năm, cho ra các danh hiệu đạt được
 DELIMITER $$
